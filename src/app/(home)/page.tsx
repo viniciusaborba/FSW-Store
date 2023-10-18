@@ -34,17 +34,17 @@ export default async function Home() {
   })
 
   return (
-    <div className="">
+    <div className="flex flex-col gap-8 py-8">
       <PromoBanner
         src={banner1}
         alt="Até 55% de desconto esse mês"
       />
 
-      <div className="mt-8 px-5">
+      <div className=" px-5">
         <Categories />
       </div>
 
-      <div className="mt-8">
+      <div >
         <SectionTitle>Ofertas</SectionTitle>
         <ProductList products={offers} />
       </div>
@@ -54,7 +54,7 @@ export default async function Home() {
         alt="Até 55% de desconto em mouses"
       />
 
-      <div className="mt-8 mb-8">
+      <div>
         <SectionTitle>Teclados</SectionTitle>
         <ProductList products={keyboards} />
       </div>
@@ -64,7 +64,7 @@ export default async function Home() {
         alt="Até 20% de desconto em fones"
       />
 
-      <div className="mt-8">
+      <div >
         <SectionTitle>Mouses</SectionTitle>
         <ProductList products={mouses} />
       </div>

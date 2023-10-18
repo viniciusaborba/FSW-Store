@@ -49,7 +49,7 @@ export const ProductItem = ({ product }: ProductItemProps) => {
             </>
           ) : (
             <p className="text-sm font-semibold">
-              R$ {product.basePrice.toFixed(2)}
+              R$ {product.basePrice.toFixed(2).replace('.', ',')}
             </p>
           )}
         </div>
