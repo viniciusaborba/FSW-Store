@@ -1,9 +1,12 @@
 import Image from "next/image";
 import banner1 from "../../../public/banner-1.png";
-import banner2 from "../../../public/banner-mouses-1.png"
+import banner2 from "../../../public/banner-mouses-1.png";
+import banner3 from "../../../public/banner-fones.png";
 import { Categories } from "./components/categories";
 import { prismaClient } from "@/lib/prisma";
 import { ProductList } from "./components/productList";
+import { SectionTitle } from "./components/section-title";
+import { PromoBanner } from "./components/PromoBanner";
 
 export default async function Home() {
   const offers = await prismaClient.product.findMany({
@@ -14,15 +17,27 @@ export default async function Home() {
     },
   });
 
+  const keyboards = await prismaClient.product.findMany({
+    where: {
+      category: {
+        slug: "keyboards",
+      },
+    },
+  });
+
+  const mouses = await prismaClient.product.findMany({
+    where: {
+      category: {
+        slug: 'mouses'
+      }
+    }
+  })
+
   return (
     <div className="">
-      <Image
+      <PromoBanner
         src={banner1}
         alt="Até 55% de desconto esse mês"
-        height={0}
-        width={0}
-        sizes="100vw"
-        className="h-auto w-full px-5"
       />
 
       <div className="mt-8 px-5">
@@ -30,18 +45,29 @@ export default async function Home() {
       </div>
 
       <div className="mt-8">
-        <p className="mb-3 pl-5 font-bold uppercase">Ofertas</p>
+        <SectionTitle>Ofertas</SectionTitle>
         <ProductList products={offers} />
       </div>
 
-      <Image
+      <PromoBanner
         src={banner2}
         alt="Até 55% de desconto em mouses"
-        height={0}
-        width={0}
-        sizes="100vw"
-        className="h-auto w-full px-5"
       />
+
+      <div className="mt-8 mb-8">
+        <SectionTitle>Teclados</SectionTitle>
+        <ProductList products={keyboards} />
+      </div>
+
+      <PromoBanner
+        src={banner3}
+        alt="Até 20% de desconto em fones"
+      />
+
+      <div className="mt-8">
+        <SectionTitle>Mouses</SectionTitle>
+        <ProductList products={mouses} />
+      </div>
     </div>
   );
 }
