@@ -8,10 +8,7 @@ const Catalog = async () => {
 
   return (
     <div className="p-5 gap-8 flex flex-col">
-      <Badge className="w-fit gap-1 text-base uppercase border-2 border-primary px-3 py-[0.375rem]" variant="outline">
-        <ShapesIcon size={16}/>
-        Catálogo
-      </Badge>
+      
 
       <div className="grid grid-cols-2 gap-8">
         {categories.map((category) => (

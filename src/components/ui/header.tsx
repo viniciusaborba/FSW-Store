@@ -16,6 +16,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarImage } from "./avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Separator } from "./separator";
+import Link from "next/link";
 
 export const Header = () => {
   const { status, data } = useSession();
@@ -96,16 +97,20 @@ export const Header = () => {
               Ofertas
             </Button>
 
-            <Button variant="outline" className="w-full justify-start gap-2">
-              <ListOrderedIcon size={16} />
-              Catálogo
-            </Button>
+            <Link href={"/catalog"}>
+              <Button variant="outline" className="w-full justify-start gap-2">
+                <ListOrderedIcon size={16} />
+                Catálogo
+              </Button>
+            </Link>
           </div>
         </SheetContent>
       </Sheet>
 
       <h1 className="text-lg font-semibold">
-        <span className="text-primary">FSW</span> Store
+        <Link href={"/"}>
+          <span className="text-primary">FSW</span> Store
+        </Link>
       </h1>
 
       <Button size="icon" variant="outline">
