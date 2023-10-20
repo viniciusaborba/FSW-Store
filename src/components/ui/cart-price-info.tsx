@@ -4,9 +4,23 @@ import { useContext } from "react";
 import { Separator } from "./separator";
 import { CartContext } from "@/providers/cart";
 import { Button } from "./button";
+import { createCheckout } from "@/actions/checkout";
+import { loadStripe } from "@stripe/stripe-js"
 
 const CartPriceInfo = () => {
-  const { subTotal, total, totalDiscount } = useContext(CartContext);
+  const { products, subTotal, total, totalDiscount } = useContext(CartContext);
+
+  const handlePurchase = async () => {
+    const checkout = await createCheckout(products)
+
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY
+    )
+
+    stripe?.redirectToCheckout({
+      sessionId: checkout.id
+    })
+  }
 
   return (
     <div className="flex flex-col gap-3">
@@ -38,7 +52,7 @@ const CartPriceInfo = () => {
         <p>R${total.toFixed(2)}</p>
       </div>
 
-      <Button className="font-bold uppercase mt-7">Finalizar compra</Button>
+      <Button className="font-bold uppercase mt-7" onClick={handlePurchase}>Finalizar compra</Button>
     </div>
   );
 };
