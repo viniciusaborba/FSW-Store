@@ -43,7 +43,9 @@ const Cart = () => {
         </ScrollArea>
       </div>
 
-      <CartPriceInfo />
+      {products.length > 0 && (
+        <CartPriceInfo />
+      )}
     </div>
   );
 };
