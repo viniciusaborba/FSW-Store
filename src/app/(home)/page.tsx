@@ -7,6 +7,7 @@ import { prismaClient } from "@/lib/prisma";
 import { ProductList } from "../../components/ui/productList";
 import { SectionTitle } from "../../components/ui/section-title";
 import { PromoBanner } from "./components/PromoBanner";
+import Link from "next/link";
 
 export default async function Home() {
   const offers = await prismaClient.product.findMany({
@@ -42,21 +43,27 @@ export default async function Home() {
       </div>
 
       <div>
-        <SectionTitle>Ofertas</SectionTitle>
+        <Link href={"/offers"}>
+          <SectionTitle>Ofertas</SectionTitle>
+        </Link>
         <ProductList products={offers} />
       </div>
 
       <PromoBanner src={banner2} alt="Até 55% de desconto em mouses" />
 
       <div>
-        <SectionTitle>Teclados</SectionTitle>
+        <Link href={"/category/keyboards"}>
+          <SectionTitle>Teclados</SectionTitle>
+        </Link>
         <ProductList products={keyboards} />
       </div>
 
       <PromoBanner src={banner3} alt="Até 20% de desconto em fones" />
 
       <div>
-        <SectionTitle>Mouses</SectionTitle>
+        <Link href={"/category/mouses"}>
+          <SectionTitle>Mouses</SectionTitle>
+        </Link>
         <ProductList products={mouses} />
       </div>
     </div>
