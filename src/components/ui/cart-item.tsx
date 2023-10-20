@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Button } from "./button";
 import { ChevronLeft, ChevronRight, TrashIcon } from "lucide-react";
 import { useContext } from "react";
-import Link from "next/link";
 
 interface CartItemProps {
   product: CartProduct;
@@ -31,7 +30,9 @@ const CartItem = ({ product }: CartItemProps) => {
         </div>
 
         <div className="flex flex-col gap-1">
-          <p className="text-xs">{product.name}</p>
+
+            <p className="text-xs">{product.name}</p>
+   
 
           <div className="flex items-center gap-2">
             <p className="text-sm font-bold">
