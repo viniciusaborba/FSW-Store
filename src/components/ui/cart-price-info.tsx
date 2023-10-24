@@ -6,11 +6,20 @@ import { CartContext } from "@/providers/cart";
 import { Button } from "./button";
 import { createCheckout } from "@/actions/checkout";
 import { loadStripe } from "@stripe/stripe-js"
+import { useSession } from "next-auth/react";
+import { createOrder } from "@/actions/order";
 
 const CartPriceInfo = () => {
+  const { data } = useSession()
   const { products, subTotal, total, totalDiscount } = useContext(CartContext);
 
   const handlePurchase = async () => {
+    if (!data?.user) {
+      return
+    }
+
+    await createOrder(products, (data!.user as any).id)
+
     const checkout = await createCheckout(products)
 
     const stripe = await loadStripe(
