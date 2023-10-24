@@ -5,6 +5,8 @@ import { ShoppingBasket } from "lucide-react";
 import { getServerSession } from "next-auth";
 import OrderItem from "./components/order-item";
 
+export const dynamic = "force-dynamic";
+
 const Orders = async () => {
   const user = getServerSession(authOptions);
 
