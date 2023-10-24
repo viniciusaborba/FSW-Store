@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Accordion,
   AccordionContent,
@@ -8,8 +10,9 @@ import { Card } from "@/components/ui/card";
 import { Prisma } from "@prisma/client";
 import { format } from "date-fns";
 import OrderProductItem from "./order-product-item";
+import ProductTotalInfo from "./product-total-info";
 
-interface OrderItemProps {
+export interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
     include: {
       orderProducts: {
@@ -28,7 +31,8 @@ const OrderItem = ({ order }: OrderItemProps) => {
         <AccordionItem value={order.id}>
           <AccordionTrigger>
             <div className="flex flex-col gap-1 text-left">
-              Pedido com {order.orderProducts.length} produto(s)
+              <p>Pedido com {order.orderProducts.length} produto(s)</p>
+              <span className="text-sm opacity-60">Feito em {format(order.createdAt, "dd/MM/yy 'às' HH:mm")}</span>
             </div>
           </AccordionTrigger>
 
@@ -37,7 +41,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
               <div className="flex items-center justify-between">
                 <div className="font-bold">
                   <p>Status</p>
-                  {order.status === 'WAITING_FOR_PAYMENT' ? (
+                  {order.status === "WAITING_FOR_PAYMENT" ? (
                     <p className="text-[#8162FF]">Aguardando pagamento</p>
                   ) : (
                     <p className="text-[#8162FF]">Pagamento aprovado</p>
@@ -63,6 +67,8 @@ const OrderItem = ({ order }: OrderItemProps) => {
                   orderProduct={orderProduct}
                 />
               ))}
+
+              <ProductTotalInfo order={order}/>
             </div>
           </AccordionContent>
         </AccordionItem>
