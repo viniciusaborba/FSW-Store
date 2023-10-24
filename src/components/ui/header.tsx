@@ -7,6 +7,7 @@ import {
   LogOutIcon,
   MenuIcon,
   PercentIcon,
+  ShoppingBasket,
   ShoppingCartIcon,
 } from "lucide-react";
 import { Button } from "./button";
@@ -29,7 +30,7 @@ import { CartContext } from "@/providers/cart";
 
 export const Header = () => {
   const { status, data } = useSession();
-  const { products } = useContext(CartContext)
+  const { products } = useContext(CartContext);
 
   const handleLoginClick = async () => {
     await signIn();
@@ -111,6 +112,20 @@ export const Header = () => {
               </Link>
             </SheetClose>
 
+            {status === "authenticated" && (
+              <SheetClose asChild>
+                <Link href={"/orders"}>
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start gap-2"
+                  >
+                    <ShoppingBasket size={16} />
+                    Meus pedidos
+                  </Button>
+                </Link>
+              </SheetClose>
+            )}
+
             {status === "unauthenticated" && (
               <Button
                 onClick={handleLoginClick}
@@ -146,7 +161,9 @@ export const Header = () => {
         <SheetTrigger asChild>
           <Button size="icon" variant="outline" className="relative">
             {products.length > 0 && (
-              <span className="absolute -right-3 -top-2 bg-primary rounded-full px-1.5">{products.length}</span>
+              <span className="absolute -right-3 -top-2 rounded-full bg-primary px-1.5">
+                {products.length}
+              </span>
             )}
             <ShoppingCartIcon />
           </Button>
