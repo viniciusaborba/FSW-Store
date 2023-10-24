@@ -11,6 +11,7 @@ import { Prisma } from "@prisma/client";
 import { format } from "date-fns";
 import OrderProductItem from "./order-product-item";
 import ProductTotalInfo from "./product-total-info";
+import { getOrderStatus } from "../helpers/status";
 
 export interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
@@ -41,11 +42,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
               <div className="flex items-center justify-between">
                 <div className="font-bold">
                   <p>Status</p>
-                  {order.status === "WAITING_FOR_PAYMENT" ? (
-                    <p className="text-[#8162FF]">Aguardando pagamento</p>
-                  ) : (
-                    <p className="text-[#8162FF]">Pagamento aprovado</p>
-                  )}
+                  <p className="text-[#8162FF]">{getOrderStatus(order.status)}</p>
                 </div>
 
                 <div className="">
