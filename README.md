@@ -11,7 +11,7 @@ This repository contains the code of a modern e-commerce model application built
 
 ## ⚠️ Warning
 
-Currently, this application is only responsive for mobile. Desktop responsivity and other functions will be implemented soon!
+Currently, this application is only responsive for mobile. Desktop responsiveness and other functions will be implemented soon!
 
 ##  🚀 How can I set up the frontend?
 
